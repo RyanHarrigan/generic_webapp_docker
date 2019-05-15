@@ -1,0 +1,36 @@
+version: "3"
+services:
+  www:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./webroot:/srv/users/apps/
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - wordpress
+
+  wordpress:
+    image: bitnami/php-fpm:latest
+    expose:
+      - 9000
+    volumes:
+      - ./webroot:/srv/users/apps/
+      - ./webroot:/etc/nginx/conf.d
+      
+  database:
+    image: mysql:latest
+    command: ['--default-authentication-plugin=mysql_native_password']
+    ports:
+      - 3306:3306
+    volumes:
+      - database_storage:/etc/mysql/conf.d
+    environment:
+      - MYSQL_DATABASE=${DC_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DC_DB_ROOT_PASS}
+      - MYSQL_USER=${DC_DB_USER}
+      - MYSQL_PASSWORD=${DC_DB_PASS}
+
+volumes:
+  database_storage:
+    
