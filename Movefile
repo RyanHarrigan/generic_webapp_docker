@@ -3,15 +3,15 @@ global:
 
 local:
   vhost: "http://wordpress.local"
-  wordpress_path: ENV['LOCAL_WEBROOT'] # use an absolute path here
+  wordpress_path: "<%= ENV['LOCAL_WEBROOT']  %>" # use an absolute path here
 
   database:
-    name: ENV['LOCAL_DB_NAME']
-    user: ENV['LOCAL_DB_USER']
-    password: ENV['LOCAL_DB_PASS']
-    host: ENV['LOCAL_DB_LOCATION']
+    name: "<%= ENV['LOCAL_DB_NAME']  %>"
+    user: "<%= ENV['LOCAL_DB_USER']  %>"
+    password: "<%= ENV['LOCAL_DB_PASS']  %>"
+    host: "<%= ENV['LOCAL_DB_LOCATION']  %>"
     port: "3306"
-    mysqldump_options: "--column-statistics=0"
+    # mysqldump_options: "--column-statistics=0"
 
   # Uncomment if you are using bedrock or sage
   #paths: # you can customize wordpress internal paths
@@ -23,14 +23,14 @@ local:
   #   languages: "app/languages"
 
 staging:
-  vhost: ENV['STAG_VHOST_DOMAIN']
-  wordpress_path: ENV['STAG_WEBROOT'] # use an absolute path here
+  vhost: "<%= ENV['STAG_VHOST_DOMAIN']  %>"
+  wordpress_path: "<%= ENV['STAG_WEBROOT']  %>" # use an absolute path here
 
   database:
-    name: ENV['STAG_DB_NAME']
-    user: ENV['STAG_DB_USER']
-    password: ENV['STAG_DB_PASS']
-    host: ENV['STAG_DB_LOCATION']
+    name: "<%= ENV['STAG_DB_NAME']  %>"
+    user: "<%= ENV['STAG_DB_USER']  %>"
+    password: "<%= ENV['STAG_DB_PASS']  %>"
+    host: "<%= ENV['STAG_DB_LOCATION']  %>"
     # port: "3308" # Use just in case you have exotic server config
     # mysqldump_options: "--max_allowed_packet=1G" # Only available if using SSH
 
@@ -45,6 +45,7 @@ staging:
     - "Movefile"
     - "wp-config.php"
     - "wp-content/*.sql.gz"
+    - "wp-content/debug.log"
 
   # paths: # you can customize wordpress internal paths
   #   wp_content: "wp-content"
@@ -55,11 +56,11 @@ staging:
   #   languages: "wp-content/languages"
 
   ssh:
-    host: ENV['STAG_HOST_IP']
-    user: ENV['STAG_APP_USER']
+    host: "<%= ENV['STAG_HOST_IP']  %>"
+    user: "<%= ENV['STAG_APP_USER']  %>"
   #   password: "password" # password is optional, will use public keys if available.
   #   port: 22 # Port is optional
-  #   rsync_options: "--verbose" # Additional rsync options, optional
+    rsync_options: "--no-perms --no-owner --no-group" # Additional rsync options, optional
   #   gateway: # Gateway is optional
   #     host: "host"
   #     user: "user"
@@ -73,14 +74,14 @@ staging:
   #   scheme: "ftps" # default "ftp"
 
 production:
-  vhost: ENV['PROD_VHOST_DOMAIN']
-  wordpress_path: ENV['PROD_WEBROOT'] # use an absolute path here
+  vhost: "<%= ENV['PROD_VHOST_DOMAIN']  %>"
+  wordpress_path: "<%= ENV['PROD_WEBROOT']  %>" # use an absolute path here
 
   database:
-    name: ENV['PROD_DB_NAME']
-    user: ENV['PROD_DB_USER']
-    password: ENV['PROD_DB_PASS']
-    host: ENV['PROD_DB_LOCATION']
+    name: "<%= ENV['PROD_DB_NAME']  %>"
+    user: "<%= ENV['PROD_DB_USER']  %>"
+    password: "<%= ENV['PROD_DB_PASS']  %>"
+    host: "<%= ENV['PROD_DB_LOCATION']  %>"
     # port: "3308" # Use just in case you have exotic server config
     # mysqldump_options: "--max_allowed_packet=1G" # Only available if using SSH
 
@@ -105,11 +106,11 @@ production:
   #   languages: "wp-content/languages"
 
   ssh:
-    host: ENV['PROD_HOST_IP']
-    user: ENV['PROD_APP_USER']
+    host: "<%= ENV['PROD_HOST_IP']  %>"
+    user: "<%= ENV['PROD_APP_USER']  %>"
   #   password: "password" # password is optional, will use public keys if available.
   #   port: 22 # Port is optional
-  #   rsync_options: "--verbose" # Additional rsync options, optional
+    rsync_options: "--no-perms --no-owner --no-group" # Additional rsync options, optional
   #   gateway: # Gateway is optional
   #     host: "host"
   #     user: "user"
