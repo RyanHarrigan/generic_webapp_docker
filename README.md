@@ -2,8 +2,6 @@
 
 This docker config is meant primarily for local development prototyping. **NOT MEANT FOR PRODUCTION.** The mysql config exposes its port to the host so that you can run scripts like `wordmove` or even manually load/dump/debug. I primarily use this config repo for WordPress, but can be used for any PHP-based web app.
 
-nginx's default.conf doesn't read from environment variables, so I set the local URL to `wordpress.local`
-
 ## Dependencies
 
 Install the following dependencies through their respective installation instructions:
@@ -32,7 +30,7 @@ The webroot folder can hold any PHP files you want. The following command instal
 `wp core download --path=webroot --skip-content`
 
 #### Configuring WordPress
-You can now go to `wordpress.local` in your browser. You can set the location of your Database Host to the value `database` because Docker's DNS resolver configures the name as provided in docker-compose.yml.
+You can now go to the url specified from `DOCKER_NGINX_HOST` in your browser. You can set the location of your Database Host to the value `database` because Docker's DNS resolver configures the name as provided in docker-compose.yml.
 
 Note that `rsync_options` in the `Movefile` is set to `--no-perms --no-owner --no-group` this means that rysnc will ignore permission changes in your webroot directory. This makes local development a little safer because it prevents forgotten permission 'fixes'
 

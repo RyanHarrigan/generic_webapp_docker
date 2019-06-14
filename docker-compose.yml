@@ -9,6 +9,9 @@ services:
       - ./nginx:/etc/nginx/conf.d
     depends_on:
       - wordpress
+    environment:
+      - NGINX_HOST=${DOCKER_NGINX_HOST}
+    command: /bin/bash -c "envsubst < /etc/nginx/conf.d/default.conf > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
 
   wordpress:
     image: bitnami/php-fpm:latest
@@ -26,10 +29,10 @@ services:
     volumes:
       - database_storage:/etc/mysql/conf.d
     environment:
-      - MYSQL_DATABASE=${DC_DB_NAME}
-      - MYSQL_ROOT_PASSWORD=${DC_DB_ROOT_PASS}
-      - MYSQL_USER=${DC_DB_USER}
-      - MYSQL_PASSWORD=${DC_DB_PASS}
+      - MYSQL_DATABASE=${DOCKER_DB_NAME}
+      - MYSQL_ROOT_PASSWORD=${DOCKER_DB_ROOT_PASS}
+      - MYSQL_USER=${DOCKER_DB_USER}
+      - MYSQL_PASSWORD=${DOCKER_DB_PASS}
 
 volumes:
   database_storage:
