@@ -1,6 +1,6 @@
 # Generic Webapp Docker Setup
 
-This docker config is meant primarily for local development prototyping. **NOT MEANT FOR PRODUCTION.** The mysql config exposes its port to the host so that you can run scripts like `wordmove` or even manually load/dump/debug. I primarily use this config repo for WordPress, but can be used for any PHP-based web app.
+This docker config is meant primarily for local development prototyping. **NOT MEANT FOR PRODUCTION.** The mysql config exposes its port to the host so that you can run scripts like `wordmove` or even manually load/dump/debug. I primarily use this config repo for WordPress, but can be used for any PHP-based web app. See my [blog](https://changeprogramming.com/docker/2019/06/14/generic_docker_webapp.html) for more information.
 
 ## Dependencies
 
